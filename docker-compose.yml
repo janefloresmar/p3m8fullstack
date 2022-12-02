@@ -1,0 +1,26 @@
+version: '3'
+services:
+  web-django:
+ #    private: 
+       image: 192.168.100.44:8082/deploy_module/app2:2.0 
+       command: python manage.py runserver 0.0.0.0:8000
+     #command: json-server -p 5000 --watch database/db.json
+       ports:
+        - "8000:8000"
+  web:
+    build: .
+    command: npm run serve
+    #command: Set-ExecutionPolicy -Scope CurrentUser unrestricted
+#    command: npm run serve
+    #command: json-server -p 5000  --watch database/db.json
+    ports:
+      - "8080:8080"
+     # - "5000:5000"
+  mydb:
+    build: . 
+    command: Set-ExecutionPolicy -Scope CurrentUser unrestricted
+    command: json-server -p 5000 --watch database/db.json
+    ports:
+      - "5000:5000"
+   
+   # restart: always
